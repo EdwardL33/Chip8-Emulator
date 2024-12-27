@@ -1,17 +1,16 @@
 # Which compiler to use
 CC = g++
-# Compiler flags
-CFLAGS = -I. -O0 -g -Werror=vla
+
 # Final executable
 TARGET = Chip8
-# File to be compiled
-OBJTEST = Chip8.cpp
+# Files to be compiled
+OBJ = Chip8.cpp main.cpp
 
 # Default Make recipe
 default: $(TARGET)
 
 $(TARGET):
-	$(CC) $(OBJTEST) -o $(TARGET)
+	$(CC) $(OBJ) -o $(TARGET)
 
 # Clean recipe: removes all build artifacts
 clean:
