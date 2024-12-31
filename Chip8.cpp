@@ -5,6 +5,7 @@
 #include <fstream>
 #include <random>
 #include <iostream>
+#include <SDL2/SDL.h>
 
 const unsigned int START_ADDRESS = 0x200; // everything before this is reserved for interpreter
 const unsigned int FONT_START_ADDRESS = 0x50; // in interpreter area of memory
