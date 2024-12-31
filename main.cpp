@@ -5,5 +5,6 @@
 
 int main(int argc, char** argv)
 {
-    std::cout<<"Hello World\n" ;
+    Chip8();
+    std::cout << "worked?\n";
 }
