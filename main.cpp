@@ -1,38 +1,52 @@
 #include "Chip8.hpp"
-// #include "Platform.hpp"
+#include "Platform.hpp"
 #include <chrono>
 #include <iostream>
 #include "include/raylib.hpp"
 
 int main(int argc, char** argv)
 {
-    // Initialization
-    //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    if (argc != 4)
+	{
+		std::cerr << "Usage: " << argv[0] << " <Scale> <Delay> <ROM>\n";
+		std::exit(EXIT_FAILURE);
+	}
 
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
+	int videoScale = std::stoi(argv[1]);
+	int cycleDelay = std::stoi(argv[2]);
+	char const* romFilename = argv[3];
 
-    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
-    //--------------------------------------------------------------------------------------
+    InitWindow(VIDEO_WIDTH*videoScale, VIDEO_HEIGHT*videoScale, "title");
+    SetTargetFPS(60);
+
+    Platform platform;
+    
+    Chip8 chip8;
+    chip8.LoadROM(romFilename);
+
+
+    auto lastCycleTime = std::chrono::high_resolution_clock::now();
+
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        BeginDrawing();
+        auto currentTime = std::chrono::high_resolution_clock::now();
+		float dt = std::chrono::duration<float, std::chrono::milliseconds::period>(currentTime - lastCycleTime).count();
 
-        ClearBackground(RAYWHITE);
+		if (dt > cycleDelay)
+		{
+			lastCycleTime = currentTime;
 
-        DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+			chip8.Cycle();
+            BeginDrawing();
+			platform.RenderDisplay(VIDEO_WIDTH, VIDEO_HEIGHT, videoScale, chip8.video);
+            EndDrawing();
 
-        EndDrawing();
+            platform.ProcessInput(chip8.keypad);
+		}
+
     }
-
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
-    //--------------------------------------------------------------------------------------
-
 
     std::cout << "worked?\n";
 

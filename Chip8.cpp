@@ -739,7 +739,7 @@ void Chip8::OP_Fx33()
 
     // for 10s place
     memory[index + 1] = decimalVal / 10;
-    decimalVal = decimalVal - memory[index] * 10;
+    decimalVal = decimalVal - memory[index + 1] * 10;
 
     // for 1s place
     memory[index + 2] = decimalVal;

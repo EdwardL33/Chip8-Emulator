@@ -23,11 +23,11 @@
 CXX = x86_64-w64-mingw32-g++
 CXXFLAGS = -I include/
 LDFLAGS = -L lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
-SOURCES = main.cpp Chip8.cpp
+SOURCES = main.cpp Chip8.cpp Platform.cpp
 TARGET = Chip8.exe
 
 all:
-	$(CXX) $(SOURCES) -o $(TARGET) $(CXXFLAGS) $(LDFLAGS) -O1 -Wall -Wno-missing-braces
+	$(CXX) $(SOURCES) -o $(TARGET) $(CXXFLAGS) $(LDFLAGS) -Wall -Wno-missing-braces
 	
 clean:
-	$(RM) Chip8
+	$(RM) Chip8.exe
