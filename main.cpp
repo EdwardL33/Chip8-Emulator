@@ -48,6 +48,7 @@ int main(int argc, char** argv)
 			// platform.RenderDisplay(VIDEO_WIDTH, VIDEO_HEIGHT, videoScale, chip8.video);
             // EndDrawing();
             platform.Update(chip8.video, videoPitch, VIDEO_HEIGHT*videoScale, VIDEO_WIDTH*videoScale);
+            
 		}
 
 

@@ -43,7 +43,7 @@
     {
         // Initialize Raylib
         InitWindow(windowWidth, windowHeight, title);
-        SetTargetFPS(60);
+        SetTargetFPS(144);
 
         // Create a texture
         texture = LoadRenderTexture(textureWidth, textureHeight);
@@ -98,56 +98,10 @@
 
 
 
-    bool Platform::ProcessInput(uint8_t* keys)
+    void Platform::ProcessInput(uint8_t* keys)
     {
-        bool quit = false;
-
-        // Handle keyboard input
-        if (WindowShouldClose())
-        {
-            quit = true;
-        }
-
-        if (IsKeyPressed(KEY_ESCAPE))
-        {
-            quit = true;
-        }
 
         // Map key events to the `keys` array
-        // if (IsKeyPressed(KEY_X)) keys[0] = 1;
-        // if (IsKeyPressed(KEY_ONE)) keys[1] = 1;
-        // if (IsKeyPressed(KEY_TWO)) keys[2] = 1;
-        // if (IsKeyPressed(KEY_THREE)) keys[3] = 1;
-        // if (IsKeyPressed(KEY_Q)) keys[4] = 1;
-        // if (IsKeyPressed(KEY_W)) keys[5] = 1;
-        // if (IsKeyPressed(KEY_E)) keys[6] = 1;
-        // if (IsKeyPressed(KEY_A)) keys[7] = 1;
-        // if (IsKeyPressed(KEY_S)) keys[8] = 1;
-        // if (IsKeyPressed(KEY_D)) keys[9] = 1;
-        // if (IsKeyPressed(KEY_Z)) keys[0xA] = 1;
-        // if (IsKeyPressed(KEY_C)) keys[0xB] = 1;
-        // if (IsKeyPressed(KEY_FOUR)) keys[0xC] = 1;
-        // if (IsKeyPressed(KEY_R)) keys[0xD] = 1;
-        // if (IsKeyPressed(KEY_F)) keys[0xE] = 1;
-        // if (IsKeyPressed(KEY_V)) keys[0xF] = 1;
-
-        // if (IsKeyReleased(KEY_X)) keys[0] = 0;
-        // if (IsKeyReleased(KEY_ONE)) keys[1] = 0;
-        // if (IsKeyReleased(KEY_TWO)) keys[2] = 0;
-        // if (IsKeyReleased(KEY_THREE)) keys[3] = 0;
-        // if (IsKeyReleased(KEY_Q)) keys[4] = 0;
-        // if (IsKeyReleased(KEY_W)) keys[5] = 0;
-        // if (IsKeyReleased(KEY_E)) keys[6] = 0;
-        // if (IsKeyReleased(KEY_A)) keys[7] = 0;
-        // if (IsKeyReleased(KEY_S)) keys[8] = 0;
-        // if (IsKeyReleased(KEY_D)) keys[9] = 0;
-        // if (IsKeyReleased(KEY_Z)) keys[0xA] = 0;
-        // if (IsKeyReleased(KEY_C)) keys[0xB] = 0;
-        // if (IsKeyReleased(KEY_FOUR)) keys[0xC] = 0;
-        // if (IsKeyReleased(KEY_R)) keys[0xD] = 0;
-        // if (IsKeyReleased(KEY_F)) keys[0xE] = 0;
-        // if (IsKeyReleased(KEY_V)) keys[0xF] = 0;
-
         if (IsKeyPressed(KEY_X)) {
             keys[0] = 1;
             printf("x pressed\n");
@@ -277,6 +231,4 @@
             keys[0xF] = 0;
             printf("V released\n");
         }
-
-        return quit;
     }

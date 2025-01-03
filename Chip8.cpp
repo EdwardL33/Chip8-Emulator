@@ -487,7 +487,7 @@ void Chip8::OP_8xyE()
 {
     uint16_t Vx = (opcode & 0x0F00u) >> 8u; // lower 4 bits of the high byte
 
-    if ((registers[Vx] & 0x8000) == 1) // if lsb of value of Vx is 1
+    if ((registers[Vx] & 0x80) == 1) // if msb of value of Vx is 1
     {
         registers[0xF] = 1;
     }
