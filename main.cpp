@@ -16,35 +16,42 @@ int main(int argc, char** argv)
 	int cycleDelay = std::stoi(argv[2]);
 	char const* romFilename = argv[3];
 
-    InitWindow(VIDEO_WIDTH*videoScale, VIDEO_HEIGHT*videoScale, "title");
-    SetTargetFPS(60);
+    // InitWindow(VIDEO_WIDTH*videoScale, VIDEO_HEIGHT*videoScale, "title");
+    // SetTargetFPS(60);
 
-    Platform platform;
-    
+    // Platform platform;
+    Platform platform("CHIP-8 Emulator", VIDEO_WIDTH * videoScale, VIDEO_HEIGHT * videoScale, VIDEO_WIDTH, VIDEO_HEIGHT);
+
     Chip8 chip8;
     chip8.LoadROM(romFilename);
 
-
+    int videoPitch = sizeof(chip8.video[0]) * VIDEO_WIDTH;
     auto lastCycleTime = std::chrono::high_resolution_clock::now();
 
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
+
+        platform.ProcessInput(chip8.keypad);
+
         auto currentTime = std::chrono::high_resolution_clock::now();
 		float dt = std::chrono::duration<float, std::chrono::milliseconds::period>(currentTime - lastCycleTime).count();
+        
 
 		if (dt > cycleDelay)
-		{
+		{   
 			lastCycleTime = currentTime;
 
 			chip8.Cycle();
-            BeginDrawing();
-			platform.RenderDisplay(VIDEO_WIDTH, VIDEO_HEIGHT, videoScale, chip8.video);
-            EndDrawing();
+            // BeginDrawing();
+			// platform.RenderDisplay(VIDEO_WIDTH, VIDEO_HEIGHT, videoScale, chip8.video);
+            // EndDrawing();
+            platform.Update(chip8.video, videoPitch);
+            std::cout << "are we updating?\n";
 
-            platform.ProcessInput(chip8.keypad);
 		}
+
 
     }
 
