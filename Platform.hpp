@@ -6,7 +6,7 @@ class Platform
 public: 
     Platform(const char* title, int windowWidth, int windowHeight, int textureWidth, int textureHeight);
     ~Platform();
-    void Update(void const* buffer, int pitch);
+    void Update(void const* buffer, int pitch, float winHeight, float winWidth);
     bool ProcessInput(uint8_t* keys);
 
 private:

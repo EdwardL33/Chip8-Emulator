@@ -32,7 +32,7 @@ int main(int argc, char** argv)
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-
+        
         platform.ProcessInput(chip8.keypad);
 
         auto currentTime = std::chrono::high_resolution_clock::now();
@@ -47,9 +47,7 @@ int main(int argc, char** argv)
             // BeginDrawing();
 			// platform.RenderDisplay(VIDEO_WIDTH, VIDEO_HEIGHT, videoScale, chip8.video);
             // EndDrawing();
-            platform.Update(chip8.video, videoPitch);
-            std::cout << "are we updating?\n";
-
+            platform.Update(chip8.video, videoPitch, VIDEO_HEIGHT*videoScale, VIDEO_WIDTH*videoScale);
 		}
 
 
