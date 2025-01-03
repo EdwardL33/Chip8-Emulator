@@ -20,14 +20,14 @@
 # all:
 # 	g++ -Isrc/Include -Lsrc/lib main.cpp Chip8.cpp -o Chip8 -lmingw32 -lSDL2main -lSDL2
 
-CXX = g++ #i686-w64-mingw32-g++
-CXXFLAGS = -I src/include
-LDFLAGS = -L src/lib -lSDL2main -lSDL2
+CXX = x86_64-w64-mingw32-g++
+CXXFLAGS = -I include/
+LDFLAGS = -L lib/ -lraylib -lopengl32 -lgdi32 -lwinmm
 SOURCES = main.cpp Chip8.cpp
-TARGET = Chip8
+TARGET = Chip8.exe
 
 all:
-	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(TARGET) $(LDFLAGS)
+	$(CXX) $(SOURCES) -o $(TARGET) $(CXXFLAGS) $(LDFLAGS) -O1 -Wall -Wno-missing-braces
 	
 clean:
 	$(RM) Chip8

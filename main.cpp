@@ -2,27 +2,42 @@
 // #include "Platform.hpp"
 #include <chrono>
 #include <iostream>
-#include <SDL2/SDL.h>
+#include "include/raylib.hpp"
 
-int WinMain(int argc, char** argv)
+int main(int argc, char** argv)
 {
+    // Initialization
+    //--------------------------------------------------------------------------------------
+    const int screenWidth = 800;
+    const int screenHeight = 450;
+
+    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
+
+    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+    //--------------------------------------------------------------------------------------
+
+    // Main game loop
+    while (!WindowShouldClose())    // Detect window close button or ESC key
+    {
+        BeginDrawing();
+
+        ClearBackground(RAYWHITE);
+
+        DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+
+        EndDrawing();
+    }
+
+    // De-Initialization
+    //--------------------------------------------------------------------------------------
+    CloseWindow();        // Close window and OpenGL context
+    //--------------------------------------------------------------------------------------
+
+
     std::cout << "worked?\n";
-
-    SDL_Window* window = nullptr;
-    SDL_Renderer* renderer = nullptr;
-
-    SDL_Init(SDL_INIT_VIDEO);
-    SDL_CreateWindowAndRenderer(500*4, 500*4,0,&window,&renderer);
-
-    SDL_SetRenderDrawColor(renderer,0,0,0,255);
-    SDL_RenderClear(renderer);
-
-    SDL_SetRenderDrawColor(renderer,255,255,255,255);
-    SDL_RenderDrawPoint(renderer,640/2,480/2);
-
-    SDL_RenderPresent(renderer);
-    SDL_Delay(10000);
 
     return 0;
 
 }
+
+
